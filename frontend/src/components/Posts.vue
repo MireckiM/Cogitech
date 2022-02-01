@@ -2,7 +2,7 @@
   <v-container>
     <v-row
       ><v-spacer></v-spacer>
-      <div v-on:click="getPosts()">
+      <div v-on:click="getPosts();readmore==false">
         <v-pagination
           color="green lighten-1"
           v-model="page"
@@ -19,7 +19,7 @@
       ><v-col cols="3"></v-col
       ><v-col>
         <v-expansion-panels>
-          <v-expansion-panel v-for="post in this.posts" v-bind:key="post.id">
+          <v-expansion-panel v-for="post in this.posts" v-bind:key="post.id" class="elevation-2">
             <v-expansion-panel-header
               v-on:click="getUser(post.userId)"
               class="mb-2 font-weight-medium"
