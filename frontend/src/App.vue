@@ -1,34 +1,24 @@
 <template>
   <v-app>
-    <v-app-bar app color="green lighten-1" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-    </v-app-bar>
-
-    <v-main>
-      <Posts />
-    </v-main>
+    <v-container>
+      <AppBar />
+      <v-main>
+        <Posts />
+      </v-main>
+    </v-container>
   </v-app>
 </template>
 
 <script>
 import Posts from "./components/Posts";
+import AppBar from "./components/AppBar";
 
 export default {
   name: "App",
 
   components: {
     Posts,
+    AppBar,
   },
 
   data: () => ({
