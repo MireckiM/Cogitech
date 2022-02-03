@@ -9,7 +9,7 @@
         "
       >
         <v-pagination
-          color="green lighten-1"
+          color="purple lighten-1"
           v-model="page"
           :length="10"
           :total-visible="7"
@@ -93,7 +93,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getPosts", "deletePost"]),
+    ...mapActions(["getPosts", "getUsers","deletePost"]),
     /*getPosts() {
       fetch(
         "https://jsonplaceholder.typicode.com/posts?_start=" +
@@ -113,6 +113,7 @@ export default {
   computed: mapGetters(["allPosts"]),
   created() {
     this.getPosts();
+    this.getUsers();
   },
 };
 </script>
