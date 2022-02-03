@@ -16,7 +16,6 @@
           clearable
         ></v-select>
       </v-col>
-      <div v-for="user in allUsers" v-bind:key="user.id"></div>
       <v-spacer></v-spacer>
     </v-row>
   </v-app-bar>

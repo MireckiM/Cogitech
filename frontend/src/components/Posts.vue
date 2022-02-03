@@ -39,39 +39,22 @@
               {{ post.body }}
               <br />
               <v-row>
-                <p class="my-4 ml-2 caption font-weight-black">~ {{ user.name }}</p>
+                <p class="my-4 ml-2 caption font-weight-black">
+                  ~ {{ user.name }}
+                </p>
                 <v-spacer></v-spacer
-                ><v-icon @click="deletePost(post.id)" medium color="red darken-1" class="mr-2"
+                ><v-icon
+                  @click="deletePost(post.id)"
+                  medium
+                  color="red darken-1"
+                  class="mr-2"
                   >mdi-delete-variant</v-icon
                 >
               </v-row>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
-        <!--<v-expansion-panels>
-          <v-expansion-panel
-            v-for="post in this.posts"
-            v-bind:key="post.id"
-            class="elevation-2"
-          >
-            <v-expansion-panel-header
-              v-on:click="getUser(post.userId)"
-              class="mb-2 font-weight-medium"
-            >
-              {{ post.id }}. {{ post.title }}
-            </v-expansion-panel-header>
-            <v-expansion-panel-content class="font-weight-light">
-              {{ post.body }}
-              <br />
-              <v-row
-                ><v-spacer></v-spacer>
-                <p class="my-4 caption font-weight-black">
-                  ~ {{ user.name }}
-                </p></v-row
-              >
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>-->
+        
       </v-col>
       <v-col cols="3"></v-col>
     </v-row>
@@ -93,24 +76,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getPosts", "getUsers","deletePost"]),
-    /*getPosts() {
-      fetch(
-        "https://jsonplaceholder.typicode.com/posts?_start=" +
-          ((this.page - 1)*10) +
-          "&_limit=10"
-      )
-        .then((response) => response.json())
-        .then((json_data) => (this.posts = json_data));
-    },*/
+    ...mapActions(["getPosts", "getUsers", "deletePost", "filterPosts"]),
+    
     getUser(id) {
       fetch("https://jsonplaceholder.typicode.com/users/" + id)
         .then((response) => response.json())
-        //.then(json => console.log(json))
         .then((json_data) => (this.user = json_data));
     },
   },
-  computed: mapGetters(["allPosts"]),
+  computed: mapGetters(["allPosts", "allUsers"]),
   created() {
     this.getPosts();
     this.getUsers();
