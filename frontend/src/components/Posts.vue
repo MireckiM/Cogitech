@@ -2,7 +2,12 @@
   <v-container>
     <v-row
       ><v-spacer></v-spacer>
-      <div v-on:click="getPosts();readmore==false">
+      <div
+        v-on:click="
+          getPosts();
+          readmore == false;
+        "
+      >
         <v-pagination
           color="green lighten-1"
           v-model="page"
@@ -19,12 +24,41 @@
       ><v-col cols="3"></v-col
       ><v-col>
         <v-expansion-panels>
-          <v-expansion-panel v-for="post in this.posts" v-bind:key="post.id" class="elevation-2">
+          <v-expansion-panel
+            v-for="post in allPosts"
+            v-bind:key="post.id"
+            class="elevation-2"
+          >
             <v-expansion-panel-header
               v-on:click="getUser(post.userId)"
               class="mb-2 font-weight-medium"
             >
-              {{post.id}}. {{ post.title }}
+              {{ post.id }}. {{ post.title }}
+            </v-expansion-panel-header>
+            <v-expansion-panel-content class="font-weight-light">
+              {{ post.body }}
+              <br />
+              <v-row>
+                <p class="my-4 ml-2 caption font-weight-black">~ {{ user.name }}</p>
+                <v-spacer></v-spacer
+                ><v-icon @click="deletePost(post.id)" medium color="red darken-1" class="mr-2"
+                  >mdi-delete-variant</v-icon
+                >
+              </v-row>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+        <!--<v-expansion-panels>
+          <v-expansion-panel
+            v-for="post in this.posts"
+            v-bind:key="post.id"
+            class="elevation-2"
+          >
+            <v-expansion-panel-header
+              v-on:click="getUser(post.userId)"
+              class="mb-2 font-weight-medium"
+            >
+              {{ post.id }}. {{ post.title }}
             </v-expansion-panel-header>
             <v-expansion-panel-content class="font-weight-light">
               {{ post.body }}
@@ -37,7 +71,7 @@
               >
             </v-expansion-panel-content>
           </v-expansion-panel>
-        </v-expansion-panels>
+        </v-expansion-panels>-->
       </v-col>
       <v-col cols="3"></v-col>
     </v-row>
@@ -45,6 +79,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Posts",
 
@@ -58,7 +93,8 @@ export default {
     };
   },
   methods: {
-    getPosts() {
+    ...mapActions(["getPosts", "deletePost"]),
+    /*getPosts() {
       fetch(
         "https://jsonplaceholder.typicode.com/posts?_start=" +
           ((this.page - 1)*10) +
@@ -66,7 +102,7 @@ export default {
       )
         .then((response) => response.json())
         .then((json_data) => (this.posts = json_data));
-    },
+    },*/
     getUser(id) {
       fetch("https://jsonplaceholder.typicode.com/users/" + id)
         .then((response) => response.json())
@@ -74,9 +110,9 @@ export default {
         .then((json_data) => (this.user = json_data));
     },
   },
+  computed: mapGetters(["allPosts"]),
   created() {
     this.getPosts();
-    //this.getUser();
   },
 };
 </script>
