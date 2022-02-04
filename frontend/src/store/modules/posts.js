@@ -14,6 +14,7 @@ const actions = {
             .then((response) => response.json());
         commit('setPosts', response);
     },
+
     async getUsers({ commit }) {
         const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
             .then((response) => response.json());
@@ -41,7 +42,6 @@ const mutations = {
     setPosts: (state, posts) => (state.posts = posts),
     setUsers: (state, users) => (state.users = users),
     deletePost: (state, id) => state.posts = state.posts.filter(post => post.id !== id),
-    //filterPosts: (state, e) => state.posts = state.posts.filter(post => post.userId == e.id),
 };
 
 export default {

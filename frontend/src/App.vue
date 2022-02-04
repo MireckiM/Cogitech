@@ -21,8 +21,11 @@ export default {
     AppBar,
   },
 
-  data: () => ({
-    //
-  }),
+  data: () => ({}),
 };
 </script>
+<style scoped>
+#app {
+  background-color: #ffeafba4;
+}
+</style>

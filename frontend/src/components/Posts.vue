@@ -2,20 +2,16 @@
   <v-container>
     <v-row
       ><v-spacer></v-spacer>
-      <div
-        v-on:click="
-          getPosts();
-          readmore == false;
-        "
-      >
+      <div @click="readmore == false">
         <v-pagination
           color="purple lighten-1"
           v-model="page"
-          :length="10"
-          :total-visible="7"
+          :length="Math.ceil(this.allPosts.length / 10)"
+          :total-visible="6"
           prev-icon="mdi-menu-left"
           next-icon="mdi-menu-right"
           class="pa-md-6 mx-lg-auto"
+          value="3"
         ></v-pagination>
       </div>
       <v-spacer></v-spacer
@@ -25,7 +21,7 @@
       ><v-col>
         <v-expansion-panels>
           <v-expansion-panel
-            v-for="post in allPosts"
+            v-for="post in allPosts.slice((this.page - 1) * 10, this.page * 10)"
             v-bind:key="post.id"
             class="elevation-2"
           >
@@ -37,7 +33,6 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content class="font-weight-light">
               {{ post.body }}
-              <br />
               <v-row>
                 <p class="my-4 ml-2 caption font-weight-black">
                   ~ {{ user.name }}
@@ -54,7 +49,6 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
-        
       </v-col>
       <v-col cols="3"></v-col>
     </v-row>
@@ -68,16 +62,14 @@ export default {
 
   data() {
     return {
-      posts: {},
       user: {},
       page: 1,
-      pages: 10,
       readmore: false,
     };
   },
   methods: {
     ...mapActions(["getPosts", "getUsers", "deletePost", "filterPosts"]),
-    
+
     getUser(id) {
       fetch("https://jsonplaceholder.typicode.com/users/" + id)
         .then((response) => response.json())
@@ -85,6 +77,15 @@ export default {
     },
   },
   computed: mapGetters(["allPosts", "allUsers"]),
+
+  watch: {
+    allPosts: function () {
+      if (this.allPosts.length <= 15) {
+        this.page = this.page * (1 / this.page);
+      }
+    },
+  },
+
   created() {
     this.getPosts();
     this.getUsers();

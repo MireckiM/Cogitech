@@ -14,9 +14,10 @@
           background-color="purple darken-2"
           rounded
           clearable
+          item-color="purple"
+          overflow-y
         ></v-select>
       </v-col>
-      <v-spacer></v-spacer>
     </v-row>
   </v-app-bar>
 </template>
@@ -35,6 +36,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
