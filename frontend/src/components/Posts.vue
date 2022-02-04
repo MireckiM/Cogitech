@@ -12,7 +12,6 @@
             prev-icon="mdi-menu-left"
             next-icon="mdi-menu-right"
             class="pa-md-6 mx-lg-auto"
-            value="3"
           ></v-pagination>
         </div>
       </v-col>
@@ -46,12 +45,13 @@
                   color="red darken-1"
                   class="mr-2"
                   >mdi-delete-variant</v-icon
-                ><v-col class="hidden-sm-and-down" xl="3" md="3"></v-col>
+                >
               </v-row>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-col>
+      <v-col class="hidden-sm-and-down" xl="3" md="3"></v-col>
     </v-row>
   </v-container>
 </template>
@@ -72,7 +72,7 @@ export default {
     ...mapActions(["getPosts", "getUsers", "deletePost", "filterPosts"]),
 
     getUser(id) {
-      fetch("https://jsonplaceholder.typicode.com/users/" + id)
+      fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
         .then((response) => response.json())
         .then((json_data) => (this.user = json_data));
     },
