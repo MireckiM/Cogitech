@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app color="purple lighten-1" dark>
     <v-row>
-      <v-col cols="4">
+      <v-col xl="4" lg="4" md="4" sm="6" xs="8">
         <v-select
           @change="filterPosts($event)"
           :items="this.allUsers"
@@ -15,7 +15,6 @@
           rounded
           clearable
           item-color="purple"
-          overflow-y
         ></v-select>
       </v-col>
     </v-row>

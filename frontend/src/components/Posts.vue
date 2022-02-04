@@ -1,24 +1,26 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col></v-col
+      ><v-col xl="6" lg="6" md="6" sm="12" xs="12">
+        <div @click="readmore == false">
+          <v-pagination
+            color="purple lighten-1"
+            v-model="page"
+            :length="Math.ceil(this.allPosts.length / 10)"
+            :total-visible="6"
+            prev-icon="mdi-menu-left"
+            next-icon="mdi-menu-right"
+            class="pa-md-6 mx-lg-auto"
+            value="3"
+          ></v-pagination>
+        </div>
+      </v-col>
+      <v-col></v-col>
+    </v-row>
     <v-row
-      ><v-spacer></v-spacer>
-      <div @click="readmore == false">
-        <v-pagination
-          color="purple lighten-1"
-          v-model="page"
-          :length="Math.ceil(this.allPosts.length / 10)"
-          :total-visible="6"
-          prev-icon="mdi-menu-left"
-          next-icon="mdi-menu-right"
-          class="pa-md-6 mx-lg-auto"
-          value="3"
-        ></v-pagination>
-      </div>
-      <v-spacer></v-spacer
-    ></v-row>
-    <v-row
-      ><v-col cols="3"></v-col
-      ><v-col>
+      ><v-col class="hidden-sm-and-down" xl="3" md="3"></v-col>
+      <v-col xl="6" lg="6" md="6" sm="12" xs="12">
         <v-expansion-panels>
           <v-expansion-panel
             v-for="post in allPosts.slice((this.page - 1) * 10, this.page * 10)"
@@ -44,13 +46,12 @@
                   color="red darken-1"
                   class="mr-2"
                   >mdi-delete-variant</v-icon
-                >
+                ><v-col class="hidden-sm-and-down" xl="3" md="3"></v-col>
               </v-row>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-col>
-      <v-col cols="3"></v-col>
     </v-row>
   </v-container>
 </template>
